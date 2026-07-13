@@ -4,13 +4,14 @@ Use Vite+ for package management and task execution. Run Astro's framework-aware
 
 ```
 vp install
-vp exec astro dev --background
+vp exec astro dev --host 0.0.0.0 --background
 vp check
 vp run check:astro
 vp run build
 ```
 
 Manage the background server with `vp exec astro dev stop`, `vp exec astro dev status`, and `vp exec astro dev logs`.
+Binding to `0.0.0.0` lets sandboxed browser tools reach the server through loopback while Astro remains available at `http://127.0.0.1:4321/` on the host.
 
 Use the `build-astro-sites` repo skill for Astro components, styling, images, icons, and verification. Consult the Astro Docs MCP before relying on version-sensitive framework behavior.
 

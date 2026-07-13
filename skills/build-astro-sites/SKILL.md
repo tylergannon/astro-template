@@ -28,13 +28,14 @@ Consult the configured Astro Docs MCP for version-sensitive APIs. This template 
 
 ```sh
 vp install
-vp exec astro dev --background
+vp exec astro dev --host 0.0.0.0 --background
 vp check
 vp run check:astro
 vp run build
 ```
 
 Use `vp run`, not `vp dev` or `vp build`, for Astro lifecycle commands: Astro wraps Vite and must remain the framework entrypoint. Use `vp add` and `vp remove` for dependency changes.
+Bind background development servers to `0.0.0.0` so sandboxed browser tools can reach them at `http://127.0.0.1:4321/`.
 
 ## Verify changes
 
