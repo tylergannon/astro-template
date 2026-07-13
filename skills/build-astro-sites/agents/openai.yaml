@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Astro Sites"
+  short_description: "Build and verify Astro 7 sites with this template"
+  default_prompt: "Build or modify this Astro site using its Vite+ workflow and Astro conventions."
