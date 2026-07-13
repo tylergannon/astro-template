@@ -4,7 +4,7 @@ Use Vite+ for package management and task execution. Run Astro's framework-aware
 
 ```
 vp install
-vp run dev -- --background
+vp exec astro dev --background
 vp check
 vp run check:astro
 vp run build

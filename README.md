@@ -45,7 +45,7 @@ npx skills add tylergannon/astro-template
 | `vp run build`       | Create the production build in `dist/`              |
 | `vp run preview`     | Preview the production build                        |
 
-Use `vp run dev -- --background` for Astro 7's agent-friendly background server. Stop it with `vp exec astro dev stop`.
+Use `vp exec astro dev --background` for Astro 7's agent-friendly background server. Stop it with `vp exec astro dev stop`.
 
 ## Included choices
 

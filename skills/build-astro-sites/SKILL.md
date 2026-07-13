@@ -28,7 +28,7 @@ Consult the configured Astro Docs MCP for version-sensitive APIs. This template 
 
 ```sh
 vp install
-vp run dev -- --background
+vp exec astro dev --background
 vp check
 vp run check:astro
 vp run build
