@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import SvelteDemo from "../components/SvelteDemo.svelte";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -22,6 +23,9 @@ import Layout from "../layouts/Layout.astro";
         Build something
         <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
       </a>
+      <div class="mt-8">
+        <SvelteDemo client:load />
+      </div>
     </section>
   </main>
 </Layout>
