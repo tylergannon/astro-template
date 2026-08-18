@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { Badge } from "$lib/components/ui/badge/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
   import {
