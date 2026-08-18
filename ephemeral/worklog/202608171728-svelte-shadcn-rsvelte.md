@@ -13,3 +13,4 @@ decision: rsvelte-check's displayed file count covers Svelte inputs, not total t
 correction: Keep first-party Svelte scripts typed and configure svelte/block-lang to require `ts`; removing `lang="ts"` can silently drop JavaScript blocks from ts-go checking.
 decision: Exclude `ephemeral/**` proof, worklog, and review prose from Oxfmt so writing required evidence cannot make the code-format gate red.
 correction: CI and agent instructions must invoke `vp run verify`; the old pre-Svelte commands omitted rsvelte formatting, linting, ts-go, and full registry compilation.
+decision: Author verification programs as TypeScript included by rsvelte-check --tsgo, and keep preview assertions structural so ordinary template extension remains green.

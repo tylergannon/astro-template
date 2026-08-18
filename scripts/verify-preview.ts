@@ -28,18 +28,27 @@ try {
     assert.ok(html.includes(expected), `Compiled preview is missing ${expected}`);
   }
 
-  const assetPaths = [
-    ...html.matchAll(/(?:component-url|renderer-url|href)="(\/_astro\/[^"]+\.(?:css|js))"/g),
-  ].map((match) => match[1]);
-  assert.equal(new Set(assetPaths).size, 3, "Expected component, renderer, and CSS assets");
+  const componentPaths = [...html.matchAll(/component-url="(\/_astro\/[^"]+\.js)"/g)].map(
+    (match) => match[1],
+  );
+  const rendererPaths = [...html.matchAll(/renderer-url="(\/_astro\/[^"]+\.js)"/g)].map(
+    (match) => match[1],
+  );
+  const stylesheetPaths = [...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map(
+    (match) => match[1],
+  );
+  assert.ok(componentPaths.length > 0, "Expected at least one compiled island component");
+  assert.ok(rendererPaths.length > 0, "Expected a compiled Svelte renderer");
 
-  for (const assetPath of new Set(assetPaths)) {
+  const assetPaths = new Set([...componentPaths, ...rendererPaths, ...stylesheetPaths]);
+
+  for (const assetPath of assetPaths) {
     const assetResponse = await fetch(new URL(assetPath, origin));
     assert.equal(assetResponse.status, 200, `${assetPath} did not return HTTP 200`);
     assert.ok((await assetResponse.arrayBuffer()).byteLength > 0, `${assetPath} was empty`);
   }
 
-  console.log("Compiled preview served the Svelte island and all three client assets.");
+  console.log(`Compiled preview served the Svelte island and ${assetPaths.size} client assets.`);
 } finally {
   await server.stop();
 }

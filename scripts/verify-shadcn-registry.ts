@@ -35,6 +35,8 @@ try {
         target === "ssr"
           ? {
               rollupOptions: {
+                // The client pass resolves every dependency; SSR externalizes bare imports to
+                // focus this second pass on compiling the registry's server output.
                 external: (id) => !id.startsWith(".") && !isAbsolute(id) && !id.startsWith("$lib"),
               },
               ssr: entry,

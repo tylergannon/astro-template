@@ -45,7 +45,7 @@ npx skills add tylergannon/astro-template
 | `vp run lint:rsvelte`   | Lint every Svelte component with rsvelte                |
 | `vp run check:rsvelte`  | Check all Svelte and TypeScript source through ts-go    |
 | `vp run check:shadcn`   | Bundle every shadcn-svelte item for client and SSR      |
-| `vp run check:preview`  | Serve and inspect the compiled production output        |
+| `vp run check:preview`  | Build, serve, and inspect the production output         |
 | `vp run check:astro`    | Run Astro's framework-aware diagnostics                 |
 | `vp run verify`         | Run every check, build, and compiled-preview smoke test |
 | `vp run build`          | Create the production build in `dist/`                  |
