@@ -7,7 +7,7 @@ Observed against the release candidate in `/Users/tyler/src/astro-template-svelt
 ### The compiled Astro site serves a real Svelte island composed from shadcn-svelte source components
 
 - `vp run build` completed a static production build with one generated route.
-- `vp exec astro preview --host 0.0.0.0 --background` started the compiled preview server as PID 94634.
+- `vp exec astro preview --host 0.0.0.0 --background` started the compiled preview server as PID 4179.
 - `GET http://127.0.0.1:4321/` returned HTTP 200 with a 9,407-byte body; the response headers are preserved in `headers.txt`.
 - The served HTML contained an `astro-island` with `client="load"`, the compiled `SvelteDemo` module, the Svelte client renderer, and server-rendered shadcn Card, Badge, and Button markup.
 - The initial rendered state contained `Svelte clicks: 0` and `Interactive count: 0`.
@@ -31,7 +31,7 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 - Tailwind content detection is scoped to `src/`, so tracked worklogs, proofs, and reviews cannot change production CSS.
 - `vp run verify` passed Vite+ formatting and linting, rsvelte formatting, rsvelte linting, rsvelte-check through ts-go, full registry client/SSR bundling, Astro checking, the production build, and a compiled-preview HTTP smoke test.
 - `vp run check:shadcn` bundled all 56 registry components for client and SSR through `@rsvelte/vite-plugin-svelte` with the project's Svelte configuration.
-- The SSR pass bundles registry dependencies instead of externalizing them; the narrow `mode-watcher` source patch therefore fails this gate if Sonner's dependency graph regresses under rsvelte. A focused expected-failure probe also makes the gate fail when rsvelte fixes the underlying multi-line field bug, signaling that the workaround can be removed.
+- The SSR pass bundles registry dependencies instead of externalizing them; the narrow `mode-watcher` source patch therefore fails this gate if Sonner's dependency graph regresses under rsvelte. Focused bug-shape, one-line, and no-rune probes distinguish the known compiler limitation; an upstream fix prints a non-blocking removal notice.
 - A temporary `.ts` file containing `const value: string = 123` was rejected by `rsvelte-check --tsgo`, proving the gate covers ordinary TypeScript as well as generated Svelte overlays; the probe was removed before release.
 - `vp run build` passed after the proof component imported generated Badge, Button, Card, CardContent, CardDescription, CardHeader, and CardTitle exports.
 - `vp exec pnpm peers check` reported no peer dependency issues.
@@ -39,6 +39,6 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 
 ## Browser evidence
 
-The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the exact compiled assets listed above and recorded three real clicks changing `Interactive count: 0` to `Interactive count: 3`, applied shadcn styles, and zero console errors in `ephemeral/reviews/202608171815-svelte-shadcn-round-02.md`.
+The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the exact compiled assets listed above and recorded three real clicks changing `Interactive count: 0` to `Interactive count: 3`, applied shadcn styles, and zero console errors in `ephemeral/reviews/202608171908-svelte-shadcn-round-08.md`.
 
 To repeat the interaction proof: run `vp run verify`, start `vp exec astro preview --host 0.0.0.0 --background`, open `http://127.0.0.1:4321/`, click the `Svelte clicks` button three times, confirm both counters read `3` with no console errors, and stop the server with `vp exec astro preview stop`.
