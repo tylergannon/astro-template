@@ -44,7 +44,7 @@ npx skills add tylergannon/astro-template
 | `vp run format:rsvelte` | Format Svelte and surrounding source through rsvelte   |
 | `vp run lint:rsvelte`   | Lint every Svelte component with rsvelte               |
 | `vp run check:rsvelte`  | Check all Svelte and TypeScript source through ts-go   |
-| `vp run check:shadcn`   | Bundle every installed shadcn-svelte registry item     |
+| `vp run check:shadcn`   | Bundle every shadcn-svelte item for client and SSR     |
 | `vp run check:astro`    | Run Astro's framework-aware diagnostics                |
 | `vp run verify`         | Run the complete Vite+, rsvelte, ts-go, and Astro gate |
 | `vp run build`          | Create the production build in `dist/`                 |

@@ -7,7 +7,7 @@ Observed against the release candidate in `/Users/tyler/src/astro-template-svelt
 ### The compiled Astro site serves a real Svelte island composed from shadcn-svelte source components
 
 - `vp run build` completed a static production build with one generated route.
-- `vp exec astro preview --host 0.0.0.0 --background` started the compiled preview server as PID 56351.
+- `vp exec astro preview --host 0.0.0.0 --background` started the compiled preview server as PID 64296.
 - `GET http://127.0.0.1:4321/` returned HTTP 200 with a 9,407-byte body; the response headers are preserved in `headers.txt`.
 - The served HTML contained an `astro-island` with `client="load"`, the compiled `SvelteDemo` module, the Svelte client renderer, and server-rendered shadcn Card, Badge, and Button markup.
 - The initial rendered state contained `Svelte clicks: 0` and `Interactive count: 0`.
@@ -28,8 +28,8 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 ### The complete installable shadcn-svelte registry corpus compiles together
 
 - The registry corpus contains 56 component directories under `src/lib/components/ui`: the 55 Vega items installed by `shadcn-svelte add --all` plus the generic registry's installable `data-table` item.
-- `vp run verify` passed Vite+ formatting and linting, rsvelte formatting, rsvelte linting, rsvelte-check through ts-go, and Astro checking with zero errors or warnings.
-- `vp run check:shadcn` bundled all 56 registry components together through `@rsvelte/vite-plugin-svelte`.
+- `vp run verify` passed Vite+ formatting and linting, rsvelte formatting, rsvelte linting, rsvelte-check through ts-go, full registry client/SSR bundling, Astro checking, and the production build.
+- `vp run check:shadcn` bundled all 56 registry components for client and SSR through `@rsvelte/vite-plugin-svelte` with the project's Svelte configuration.
 - A temporary `.ts` file containing `const value: string = 123` was rejected by `rsvelte-check --tsgo`, proving the gate covers ordinary TypeScript as well as generated Svelte overlays; the probe was removed before release.
 - `vp run build` passed after the proof component imported generated Badge, Button, Card, CardContent, CardDescription, CardHeader, and CardTitle exports.
 - `vp exec pnpm peers check` reported no peer dependency issues.
@@ -37,4 +37,4 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 
 ## Browser evidence
 
-The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the same compiled preview server and recorded three real clicks changing `Interactive count: 0` to `Interactive count: 3`, applied shadcn styles, and zero console errors in `ephemeral/reviews/202608171805-svelte-shadcn-round-01.md`.
+The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the exact compiled assets listed above and recorded three real clicks changing `Interactive count: 0` to `Interactive count: 3`, applied shadcn styles, and zero console errors in `ephemeral/reviews/202608171815-svelte-shadcn-round-02.md`.

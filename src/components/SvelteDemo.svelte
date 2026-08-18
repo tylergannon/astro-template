@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Badge } from "$lib/components/ui/badge/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
   import {
@@ -9,7 +9,7 @@
     CardTitle,
   } from "$lib/components/ui/card/index.js";
 
-  let count = $state(0);
+  let count: number = $state(0);
 </script>
 
 <Card class="max-w-md" data-testid="svelte-shadcn-demo">

@@ -10,3 +10,5 @@ decision: Keep rsvelte-lint's recommended correctness rules but disable style ru
 correction: Release proof must exercise the compiled preview server, a Svelte island authored in an Astro page, multiple generated shadcn-svelte components, and client-side hydration before merge and versioning.
 decision: Keep the recommended rsvelte lint rules for first-party source and isolate shadcn-generated suppressions in rsvelte-lint.generated.json.
 decision: rsvelte-check's displayed file count covers Svelte inputs, not total ts-go coverage; a deliberate TypeScript error in a temporary .ts file was caught by the existing rsvelte-check --tsgo gate.
+correction: Keep first-party Svelte scripts typed and configure svelte/block-lang to require `ts`; removing `lang="ts"` can silently drop JavaScript blocks from ts-go checking.
+decision: Exclude `ephemeral/**` proof, worklog, and review prose from Oxfmt so writing required evidence cannot make the code-format gate red.

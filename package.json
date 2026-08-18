@@ -14,7 +14,7 @@
     "lint:rsvelte": "rsvelte-lint --max-warnings 0 src/ && rsvelte-lint --config rsvelte-lint.generated.json --max-warnings 0 src/lib/components/ui src/lib/hooks",
     "check:rsvelte": "rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings",
     "check:shadcn": "node scripts/verify-shadcn-registry.mjs",
-    "verify": "vp check && rsvelte-fmt --no-native-js --no-native-css --check . && vp run lint:rsvelte && rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings && vp run check:shadcn && astro check"
+    "verify": "vp check && rsvelte-fmt --no-native-js --no-native-css --check . && vp run lint:rsvelte && rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings && vp run check:shadcn && astro check && astro build"
   },
   "dependencies": {
     "@astrojs/svelte": "^9.0.1",
@@ -22,6 +22,7 @@
     "@iconify-json/lucide": "^1.2.123",
     "@internationalized/date": "^3.12.3",
     "@lucide/svelte": "^1.31.0",
+    "@tanstack/table-core": "^8.21.3",
     "astro": "^7.2.2",
     "astro-icon": "^1.1.5",
     "bits-ui": "^2.18.1",
@@ -46,7 +47,6 @@
     "@rsvelte/svelte-check": "^0.5.19",
     "@rsvelte/vite-plugin-svelte": "^0.5.2",
     "@tailwindcss/vite": "^4.3.3",
-    "@tanstack/table-core": "^8.21.3",
     "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "shadcn-svelte": "^1.5.0",
     "tailwindcss": "^4.3.3",

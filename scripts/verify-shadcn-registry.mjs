@@ -1,4 +1,4 @@
-import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -6,6 +6,8 @@ import { svelte } from "@rsvelte/vite-plugin-svelte";
 import { build } from "vite";
 
 const uiRoot = resolve("src/lib/components/ui");
+const packageManifest = JSON.parse(await readFile(resolve("package.json"), "utf8"));
+const runtimeDependencies = Object.keys(packageManifest.dependencies);
 const componentNames = (await readdir(uiRoot, { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
@@ -21,25 +23,38 @@ try {
       .join("\n"),
   );
 
-  await build({
-    configFile: false,
-    logLevel: "warn",
-    plugins: [svelte()],
-    resolve: {
-      alias: {
-        $lib: resolve("src/lib"),
+  for (const target of ["client", "ssr"]) {
+    await build({
+      configFile: false,
+      logLevel: "warn",
+      plugins: [svelte({ configFile: resolve("svelte.config.js") })],
+      resolve: {
+        alias: {
+          $lib: resolve("src/lib"),
+        },
       },
-    },
-    build: {
-      lib: {
-        entry,
-        formats: ["es"],
-      },
-      write: false,
-    },
-  });
+      build:
+        target === "ssr"
+          ? {
+              rollupOptions: {
+                external: runtimeDependencies,
+              },
+              ssr: entry,
+              write: false,
+            }
+          : {
+              lib: {
+                entry,
+                formats: ["es"],
+              },
+              write: false,
+            },
+    });
+  }
 
-  console.log(`Bundled all ${componentNames.length} shadcn-svelte registry components.`);
+  console.log(
+    `Bundled all ${componentNames.length} shadcn-svelte registry components for client and SSR.`,
+  );
 } finally {
   await rm(workspace, { recursive: true, force: true });
 }
