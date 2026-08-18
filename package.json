@@ -15,7 +15,7 @@
     "check:rsvelte": "rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings",
     "check:shadcn": "node scripts/verify-shadcn-registry.ts",
     "check:preview": "astro build && node scripts/verify-preview.ts",
-    "verify": "vp check && rsvelte-fmt --no-native-js --no-native-css --check . && vp run lint:rsvelte && rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings && vp run check:shadcn && astro check && astro build && node scripts/verify-preview.ts"
+    "verify": "vp check && vp run format:rsvelte:check && vp run lint:rsvelte && vp run check:rsvelte && vp run check:shadcn && vp run check:astro && vp run check:preview"
   },
   "dependencies": {
     "@astrojs/svelte": "^9.0.1",
@@ -63,6 +63,6 @@
     }
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.18.0"
   }
 }

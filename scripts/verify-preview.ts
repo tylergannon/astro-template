@@ -37,8 +37,15 @@ try {
   const stylesheetPaths = [...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map(
     (match) => match[1],
   );
+  const hasInlineApplicationStyles = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].some(
+    (match) => !match[1].includes("astro-island,astro-slot"),
+  );
   assert.ok(componentPaths.length > 0, "Expected at least one compiled island component");
   assert.ok(rendererPaths.length > 0, "Expected a compiled Svelte renderer");
+  assert.ok(
+    stylesheetPaths.length > 0 || hasInlineApplicationStyles,
+    "Expected external or inline application styles",
+  );
 
   const assetPaths = new Set([...componentPaths, ...rendererPaths, ...stylesheetPaths]);
 

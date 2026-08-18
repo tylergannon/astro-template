@@ -4,6 +4,8 @@ A small, opinionated Astro 7 starter managed by [Vite+](https://viteplus.dev/). 
 
 ## Create a project
 
+Node.js 22.18 or newer is required.
+
 Install the `vp` CLI once:
 
 ```sh

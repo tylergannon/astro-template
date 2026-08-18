@@ -18,16 +18,17 @@ The page's exact hashed assets all returned HTTP 200. Their fetched byte counts 
 
 | Asset                       |   Bytes | SHA-256                                                            |
 | --------------------------- | ------: | ------------------------------------------------------------------ |
-| `index.html`                |   9,407 | `b0a84f122b20947eeb34735cb1c893d6c80b49d1f1037f8cf3c515f53561f61c` |
+| `index.html`                |   9,407 | `7f0f96d4e9ed1e30aaf924c057b7e9b7e190fe1df4860ab1aa0af1339ba95aef` |
 | `SvelteDemo.B4wkXbiv.js`    |  75,514 | `a9df798a58afbae3a03462e2c9a816717c58e448b93140618e489b564ca4c68d` |
 | `client.svelte.B0c_jibu.js` |     889 | `27759faa551f3e02073bd3b66cadb4e738c2e273d88918cfe3822de884991af2` |
-| `index.72SPUhtv.css`        | 148,923 | `459bb20726e2f63eba8e074dc7bd727b443960b0dda0caeda4038bfda9b43210` |
+| `index.D11LqwnS.css`        | 148,806 | `41c14065e890c8e656aec44b6444abae5ce4d594aa8c2380088f9bb5a0f2e5da` |
 
 The compiled `SvelteDemo` bundle contains the counter's event handler and both reactive count labels.
 
 ### The complete installable shadcn-svelte registry corpus compiles together
 
 - The registry corpus contains 56 component directories under `src/lib/components/ui`: the 55 Vega items installed by `shadcn-svelte add --all` plus the generic registry's installable `data-table` item.
+- Tailwind content detection is scoped to `src/`, so tracked worklogs, proofs, and reviews cannot change production CSS.
 - `vp run verify` passed Vite+ formatting and linting, rsvelte formatting, rsvelte linting, rsvelte-check through ts-go, full registry client/SSR bundling, Astro checking, the production build, and a compiled-preview HTTP smoke test.
 - `vp run check:shadcn` bundled all 56 registry components for client and SSR through `@rsvelte/vite-plugin-svelte` with the project's Svelte configuration.
 - A temporary `.ts` file containing `const value: string = 123` was rejected by `rsvelte-check --tsgo`, proving the gate covers ordinary TypeScript as well as generated Svelte overlays; the probe was removed before release.

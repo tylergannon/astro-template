@@ -14,3 +14,4 @@ correction: Keep first-party Svelte scripts typed and configure svelte/block-lan
 decision: Exclude `ephemeral/**` proof, worklog, and review prose from Oxfmt so writing required evidence cannot make the code-format gate red.
 correction: CI and agent instructions must invoke `vp run verify`; the old pre-Svelte commands omitted rsvelte formatting, linting, ts-go, and full registry compilation.
 decision: Author verification programs as TypeScript included by rsvelte-check --tsgo, and keep preview assertions structural so ordinary template extension remains green.
+correction: Disable Tailwind automatic root scanning and explicitly source `src/`; tracked proof and review prose must never generate production utilities or perturb asset hashes.
