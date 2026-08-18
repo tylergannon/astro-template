@@ -9,7 +9,7 @@
     CardTitle,
   } from "$lib/components/ui/card/index.js";
 
-  let count: number = $state(0);
+  let count = $state(0);
 </script>
 
 <Card class="max-w-md" data-testid="svelte-shadcn-demo">

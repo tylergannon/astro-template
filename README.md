@@ -36,19 +36,20 @@ npx skills add tylergannon/astro-template
 
 ## Commands
 
-| Command                 | Purpose                                                |
-| ----------------------- | ------------------------------------------------------ |
-| `vp install`            | Install the pinned pnpm toolchain and dependencies     |
-| `vp run dev`            | Start Astro's Vite-powered development server          |
-| `vp check`              | Run Vite+'s native formatting and non-Svelte linting   |
-| `vp run format:rsvelte` | Format Svelte and surrounding source through rsvelte   |
-| `vp run lint:rsvelte`   | Lint every Svelte component with rsvelte               |
-| `vp run check:rsvelte`  | Check all Svelte and TypeScript source through ts-go   |
-| `vp run check:shadcn`   | Bundle every shadcn-svelte item for client and SSR     |
-| `vp run check:astro`    | Run Astro's framework-aware diagnostics                |
-| `vp run verify`         | Run the complete Vite+, rsvelte, ts-go, and Astro gate |
-| `vp run build`          | Create the production build in `dist/`                 |
-| `vp run preview`        | Preview the production build                           |
+| Command                 | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- |
+| `vp install`            | Install the pinned pnpm toolchain and dependencies      |
+| `vp run dev`            | Start Astro's Vite-powered development server           |
+| `vp check`              | Run Vite+'s native formatting and non-Svelte linting    |
+| `vp run format:rsvelte` | Format Svelte and surrounding source through rsvelte    |
+| `vp run lint:rsvelte`   | Lint every Svelte component with rsvelte                |
+| `vp run check:rsvelte`  | Check all Svelte and TypeScript source through ts-go    |
+| `vp run check:shadcn`   | Bundle every shadcn-svelte item for client and SSR      |
+| `vp run check:preview`  | Serve and inspect the compiled production output        |
+| `vp run check:astro`    | Run Astro's framework-aware diagnostics                 |
+| `vp run verify`         | Run every check, build, and compiled-preview smoke test |
+| `vp run build`          | Create the production build in `dist/`                  |
+| `vp run preview`        | Preview the production build                            |
 
 Use `vp exec astro dev --host 0.0.0.0 --background` for Astro 7's agent-friendly background server. The explicit host binding lets sandboxed browser tools reach it at `http://127.0.0.1:4321/`. Stop it with `vp exec astro dev stop`.
 

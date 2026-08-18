@@ -12,3 +12,4 @@ decision: Keep the recommended rsvelte lint rules for first-party source and iso
 decision: rsvelte-check's displayed file count covers Svelte inputs, not total ts-go coverage; a deliberate TypeScript error in a temporary .ts file was caught by the existing rsvelte-check --tsgo gate.
 correction: Keep first-party Svelte scripts typed and configure svelte/block-lang to require `ts`; removing `lang="ts"` can silently drop JavaScript blocks from ts-go checking.
 decision: Exclude `ephemeral/**` proof, worklog, and review prose from Oxfmt so writing required evidence cannot make the code-format gate red.
+correction: CI and agent instructions must invoke `vp run verify`; the old pre-Svelte commands omitted rsvelte formatting, linting, ts-go, and full registry compilation.

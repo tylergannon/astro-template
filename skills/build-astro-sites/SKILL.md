@@ -29,11 +29,7 @@ Consult the configured Astro Docs MCP for version-sensitive APIs. This template 
 ```sh
 vp install
 vp exec astro dev --host 0.0.0.0 --background
-vp check
-vp run check:rsvelte
-vp run check:shadcn
-vp run check:astro
-vp run build
+vp run verify
 ```
 
 Use `vp run`, not `vp dev` or `vp build`, for Astro lifecycle commands: Astro wraps Vite and must remain the framework entrypoint. Use `vp add` and `vp remove` for dependency changes.
@@ -44,4 +40,4 @@ After adding or updating shadcn-svelte registry items, run `vp run check:shadcn`
 
 ## Verify changes
 
-Run `vp check`, `vp run check:rsvelte`, `vp run check:shadcn`, `vp run check:astro`, and `vp run build`. For visible work, also open the running site and check the changed route at narrow and wide viewports, keyboard focus, console errors, and image layout shift.
+Run `vp run verify`; it owns the complete format, lint, ts-go, client/SSR registry, Astro, production-build, and compiled-preview gate. For visible work, also open the running site and check the changed route at narrow and wide viewports, keyboard focus, console errors, and image layout shift.

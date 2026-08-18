@@ -14,7 +14,8 @@
     "lint:rsvelte": "rsvelte-lint --max-warnings 0 src/ && rsvelte-lint --config rsvelte-lint.generated.json --max-warnings 0 src/lib/components/ui src/lib/hooks",
     "check:rsvelte": "rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings",
     "check:shadcn": "node scripts/verify-shadcn-registry.mjs",
-    "verify": "vp check && rsvelte-fmt --no-native-js --no-native-css --check . && vp run lint:rsvelte && rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings && vp run check:shadcn && astro check && astro build"
+    "check:preview": "node scripts/verify-preview.mjs",
+    "verify": "vp check && rsvelte-fmt --no-native-js --no-native-css --check . && vp run lint:rsvelte && rsvelte-check --tsgo --tsconfig tsconfig.json --fail-on-warnings && vp run check:shadcn && astro check && astro build && vp run check:preview"
   },
   "dependencies": {
     "@astrojs/svelte": "^9.0.1",

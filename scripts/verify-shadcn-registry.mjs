@@ -1,13 +1,11 @@
-import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { isAbsolute, join, resolve } from "node:path";
 
 import { svelte } from "@rsvelte/vite-plugin-svelte";
 import { build } from "vite";
 
 const uiRoot = resolve("src/lib/components/ui");
-const packageManifest = JSON.parse(await readFile(resolve("package.json"), "utf8"));
-const runtimeDependencies = Object.keys(packageManifest.dependencies);
 const componentNames = (await readdir(uiRoot, { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
@@ -37,7 +35,7 @@ try {
         target === "ssr"
           ? {
               rollupOptions: {
-                external: runtimeDependencies,
+                external: (id) => !id.startsWith(".") && !isAbsolute(id) && !id.startsWith("$lib"),
               },
               ssr: entry,
               write: false,
