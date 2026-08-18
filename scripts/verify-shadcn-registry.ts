@@ -64,10 +64,16 @@ try {
   );
 
   if (singlelineRuneError) {
-    throw singlelineRuneError;
+    throw new Error(
+      "The rsvelte one-line control probe failed; the documented class-field workaround no longer compiles.",
+      { cause: singlelineRuneError },
+    );
   }
   if (multilinePlainError) {
-    throw multilinePlainError;
+    throw new Error(
+      "The rsvelte no-rune control probe failed; this is a broader class-field parser regression.",
+      { cause: multilinePlainError },
+    );
   }
 
   const knownIssueStillPresent =

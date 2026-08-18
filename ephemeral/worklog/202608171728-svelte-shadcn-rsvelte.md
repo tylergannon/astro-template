@@ -18,3 +18,4 @@ correction: Disable Tailwind automatic root scanning and explicitly source `src/
 friction: rsvelte 0.5.2 miscompiles mode-watcher's multiline class-field ternary after a $state field during SSR -> patch that expression to one line, render Sonner in the real demo, and keep dependencies bundled in the registry SSR gate.
 correction: Keep dependency regressions in the registry gate instead of permanently mounting Sonner in the public starter; document the same rsvelte 0.5.2 limitation for first-party rune modules and make its expected-failure probe signal when the workaround can be removed.
 correction: A healthy upstream compiler fix must not red-line the release gate -> use working one-line and no-rune controls to discriminate the known bug, and make the expiry signal a non-blocking removal notice.
+correction: Verification controls must explain the guarantee that failed instead of surfacing only a stack trace for an already-removed temporary probe file.
