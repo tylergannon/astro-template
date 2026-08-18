@@ -83,7 +83,7 @@ try {
   }
   if (!knownIssueStillPresent) {
     console.warn(
-      "NOTICE: rsvelte now accepts multiline class-field initializers; remove the mode-watcher patch and known-limitation probe.",
+      "NOTICE: rsvelte now accepts multiline class-field initializers; remove the known-limitation probe and documentation.",
     );
   }
 

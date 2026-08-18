@@ -21,8 +21,6 @@ minimumReleaseAgeExclude:
 overrides:
   "@sveltejs/vite-plugin-svelte": "npm:@rsvelte/vite-plugin-svelte@^0.5.2"
   vite: "catalog:"
-patchedDependencies:
-  mode-watcher@1.1.0: patches/mode-watcher@1.1.0.patch
 peerDependencyRules:
   allowAny:
     - vite
