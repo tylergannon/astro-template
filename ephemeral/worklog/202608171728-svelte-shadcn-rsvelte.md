@@ -19,4 +19,5 @@ friction: rsvelte 0.5.2 miscompiles mode-watcher's multiline class-field ternary
 correction: Keep dependency regressions in the registry gate instead of permanently mounting Sonner in the public starter; document the same rsvelte 0.5.2 limitation for first-party rune modules and make its expected-failure probe signal when the workaround can be removed.
 correction: A healthy upstream compiler fix must not red-line the release gate -> use working one-line and no-rune controls to discriminate the known bug, and make the expiry signal a non-blocking removal notice.
 correction: Verification controls must explain the guarantee that failed instead of surfacing only a stack trace for an already-removed temporary probe file.
-decision: Make the starter consistently dark-only instead of shipping a dead light palette; use semantic theme tokens throughout, fix Sonner to the documented dark theme, and remove the incompatible mode-watcher runtime and vendor patch.
+decision: Make the starter consistently dark-only instead of shipping a dead light palette; use semantic theme tokens throughout, fix Sonner to the documented dark theme, and remove the now-unneeded mode-watcher runtime and its vendor patch.
+correction: Record the intentional Sonner registry divergence in both source and consumer docs so a future `--overwrite` does not silently restore mode-watcher.

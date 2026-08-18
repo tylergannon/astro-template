@@ -1,4 +1,6 @@
 <script lang="ts">
+  // Intentional template divergence: keep Sonner dark-only and do not restore
+  // mode-watcher when refreshing this generated component from the registry.
   import {
     Toaster as Sonner,
     type ToasterProps as SonnerProps,

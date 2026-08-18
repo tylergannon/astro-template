@@ -39,6 +39,6 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 
 ## Browser evidence
 
-The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the exact compiled assets listed above and recorded three real clicks changing `Interactive count: 0` to `Interactive count: 3`, applied shadcn styles, and zero console errors in the final adversarial review artifact.
+The primary Codex browser runtime reported no available browser backends. The independent adversarial reviewer used local headless Chrome 151 against the exact compiled assets listed above and recorded real clicks changing `Interactive count: 0` to `Interactive count: 2`, applied shadcn styles, and zero console errors in `ephemeral/reviews/202608171925-svelte-shadcn-round-11.md`.
 
 To repeat the interaction proof: run `vp run verify`, start `vp exec astro preview --host 0.0.0.0 --background`, open `http://127.0.0.1:4321/`, click the `Svelte clicks` button three times, confirm both counters read `3` with no console errors, and stop the server with `vp exec astro preview stop`.
