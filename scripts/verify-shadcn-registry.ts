@@ -12,8 +12,44 @@ const componentNames = (await readdir(uiRoot, { withFileTypes: true }))
   .sort();
 const workspace = await mkdtemp(join(tmpdir(), "astro-template-shadcn-"));
 const entry = join(workspace, "registry.ts");
+const rsvelteKnownIssueProbe = join(workspace, "multiline-field-probe.svelte.js");
 
 try {
+  await writeFile(
+    rsvelteKnownIssueProbe,
+    `export class Probe {
+  #rune = $state(0);
+  #value = true
+    ? 1
+    : 2;
+}
+`,
+  );
+
+  let knownIssueStillPresent = false;
+  try {
+    await build({
+      configFile: false,
+      logLevel: "silent",
+      plugins: [svelte({ configFile: resolve("svelte.config.js") })],
+      build: {
+        ssr: rsvelteKnownIssueProbe,
+        write: false,
+      },
+    });
+  } catch (error) {
+    if (!(error instanceof Error) || !error.message.includes("Unexpected token")) {
+      throw error;
+    }
+    knownIssueStillPresent = true;
+  }
+
+  if (!knownIssueStillPresent) {
+    throw new Error(
+      "rsvelte now accepts multiline class-field initializers; remove the mode-watcher patch and known-limitation probe.",
+    );
+  }
+
   await writeFile(
     entry,
     componentNames
@@ -48,7 +84,7 @@ try {
   }
 
   console.log(
-    `Bundled all ${componentNames.length} shadcn-svelte registry components for client and SSR.`,
+    `Confirmed the documented rsvelte limitation and bundled all ${componentNames.length} shadcn-svelte registry components for client and SSR.`,
   );
 } finally {
   await rm(workspace, { recursive: true, force: true });
