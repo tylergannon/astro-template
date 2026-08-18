@@ -1,8 +1,10 @@
 # Astro 7 + Vite+ template
 
-A small, opinionated Astro 7 starter managed by [Vite+](https://viteplus.dev/). It includes Tailwind CSS 4, Lucide icons through `astro-icon`, responsive Astro images, strict TypeScript, repository-local agent guidance, and the official Astro Docs MCP server.
+A small, opinionated Astro 7 starter managed by [Vite+](https://viteplus.dev/). It includes Tailwind CSS 4, Svelte 5, the complete installable shadcn-svelte registry, the Rust-powered rsvelte toolchain, ts-go type-checking, Lucide icons, responsive Astro images, repository-local agent guidance, and the official Astro Docs MCP server.
 
 ## Create a project
+
+Node.js 22.18 or newer is required.
 
 Install the `vp` CLI once:
 
@@ -36,22 +38,33 @@ npx skills add tylergannon/astro-template
 
 ## Commands
 
-| Command              | Purpose                                             |
-| -------------------- | --------------------------------------------------- |
-| `vp install`         | Install the pinned pnpm toolchain and dependencies  |
-| `vp run dev`         | Start Astro's Vite-powered development server       |
-| `vp check`           | Format, lint, and type-check supported source files |
-| `vp run check:astro` | Run Astro's `.astro` diagnostics                    |
-| `vp run build`       | Create the production build in `dist/`              |
-| `vp run preview`     | Preview the production build                        |
+| Command                 | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- |
+| `vp install`            | Install the pinned pnpm toolchain and dependencies      |
+| `vp run dev`            | Start Astro's Vite-powered development server           |
+| `vp check`              | Run Vite+'s native formatting and non-Svelte linting    |
+| `vp run format:rsvelte` | Format Svelte and surrounding source through rsvelte    |
+| `vp run lint:rsvelte`   | Lint every Svelte component with rsvelte                |
+| `vp run check:rsvelte`  | Check all Svelte and TypeScript source through ts-go    |
+| `vp run check:shadcn`   | Bundle every shadcn-svelte item for client and SSR      |
+| `vp run check:preview`  | Build, serve, and inspect the production output         |
+| `vp run check:astro`    | Run Astro's framework-aware diagnostics                 |
+| `vp run verify`         | Run every check, build, and compiled-preview smoke test |
+| `vp run build`          | Create the production build in `dist/`                  |
+| `vp run preview`        | Preview the production build                            |
 
 Use `vp exec astro dev --host 0.0.0.0 --background` for Astro 7's agent-friendly background server. The explicit host binding lets sandboxed browser tools reach it at `http://127.0.0.1:4321/`. Stop it with `vp exec astro dev stop`.
 
 ## Included choices
 
 - Tailwind CSS 4 uses the preferred `@tailwindcss/vite` plugin. Theme tokens live in `src/styles/global.css`; no Tailwind config file is needed.
+- Astro's official Svelte integration renders Svelte 5 components and hydrates only components with a `client:*` directive. The integration's compiler plugin is redirected to `@rsvelte/vite-plugin-svelte`.
+- All 56 source-installable registry components live under `src/lib/components/ui/`. The shadcn CLI remains installed for registry updates.
+- rsvelte handles Svelte compilation, formatting, linting, and project checks. `rsvelte-check --tsgo` uses the installed TypeScript native preview. The `svelte` dependency remains necessary because rsvelte replaces the compiler/tooling layer, not Svelte's browser and server runtimes.
+- This starter is intentionally dark-only: the shadcn tokens, browser color scheme, hero, and Sonner wrapper all use one dark theme. Add an explicit theme switcher before introducing light or system mode.
+- `src/lib/components/ui/sonner/sonner.svelte` intentionally differs from the registry: it hardcodes `theme="dark"` and omits `mode-watcher`. Preserve that change after `shadcn-svelte add sonner --overwrite`, or add a complete theme switcher and restore the dependency.
+- Known rsvelte 0.5.2 limitation: in `.svelte.js`/`.svelte.ts` rune modules, a non-rune class field with a multi-line initializer after a rune-backed field can fail with `[PARSE_ERROR] Unexpected token`. Keep that initializer on one line. `vp run check:shadcn` distinguishes that bug from working one-line and no-rune controls; an [upstream rsvelte](https://github.com/baseballyama/rsvelte/issues) fix prints a non-blocking removal notice.
+- Known Astro limitation: the installed `form` registry item composes `formsnap` with `sveltekit-superforms`; the latter's runtime requires SvelteKit's `$app/*` modules. Its source is retained for complete registry coverage, but `Form.Field` cannot be instantiated in this Astro template. Use the framework-neutral Field, Input, Label, and related components for Astro forms.
 - `astro-icon` renders local, tree-shaken Iconify icons. The Lucide collection is installed; use `<Icon name="lucide:arrow-right" />`.
 - Astro's image defaults use `layout: "constrained"` and responsive styles. Put optimizable images in `src/assets/`, import them, and render them with `astro:assets`. Use `layout="full-width"` for heroes and `priority` only above the fold.
 - The official Astro Docs MCP endpoint is committed for Codex and VS Code. Other MCP clients can use `https://mcp.docs.astro.build/mcp` with Streamable HTTP.
-
-No UI component library is installed yet. This keeps the base template framework-free and leaves that decision to the first real site.

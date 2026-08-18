@@ -5,13 +5,15 @@ Use Vite+ for package management and task execution. Run Astro's framework-aware
 ```
 vp install
 vp exec astro dev --host 0.0.0.0 --background
-vp check
-vp run check:astro
-vp run build
+vp run verify
 ```
 
 Manage the background server with `vp exec astro dev stop`, `vp exec astro dev status`, and `vp exec astro dev logs`.
 Binding to `0.0.0.0` lets sandboxed browser tools reach the server through loopback while Astro remains available at `http://127.0.0.1:4321/` on the host.
+
+Svelte compilation is redirected through `@rsvelte/vite-plugin-svelte`. Use `vp run format:rsvelte`, `vp run lint:rsvelte`, and `vp run check:rsvelte` for Svelte files; the checker runs through ts-go. Keep the `svelte` package installed because rsvelte replaces the compiler and tooling, not the runtime imported by generated components.
+Run `vp run check:shadcn` after registry updates to bundle every installed shadcn-svelte component through rsvelte.
+Run `vp run verify` before committing; it owns the complete format, lint, ts-go, client/SSR registry, Astro, production-build, and compiled-preview gate.
 
 Use the `build-astro-sites` repo skill for Astro components, styling, images, icons, and verification. Consult the Astro Docs MCP before relying on version-sensitive framework behavior.
 

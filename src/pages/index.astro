@@ -1,27 +1,31 @@
 ---
 import { Icon } from "astro-icon/components";
+import SvelteDemo from "../components/SvelteDemo.svelte";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Astro 7 + Vite+">
   <main class="mx-auto flex min-h-screen max-w-5xl items-center px-6 py-20">
     <section class="max-w-3xl">
-      <p class="mb-5 font-mono text-sm font-semibold tracking-widest text-violet-300 uppercase">
+      <p class="text-primary mb-5 font-mono text-sm font-semibold tracking-widest uppercase">
         Astro 7 + Vite+
       </p>
       <h1 class="text-5xl font-semibold tracking-tight text-balance sm:text-7xl">
         A fast foundation for the next site.
       </h1>
-      <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300">
+      <p class="text-muted-foreground mt-7 max-w-2xl text-lg leading-8">
         Astro, Tailwind CSS, responsive images, local Lucide icons, and agent-ready project guidance—installed and managed through one <code>vp</code> workflow.
       </p>
       <a
-        class="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-slate-950 transition hover:bg-violet-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:outline-ring mt-10 inline-flex items-center gap-2 rounded-full px-5 py-3 font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-4"
         href="https://docs.astro.build"
       >
         Build something
         <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
       </a>
+      <div class="mt-8">
+        <SvelteDemo client:load />
+      </div>
     </section>
   </main>
 </Layout>

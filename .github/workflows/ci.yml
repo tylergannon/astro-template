@@ -18,6 +18,4 @@ jobs:
           node-version: "24"
           cache: true
       - run: vp install --frozen-lockfile
-      - run: vp check
-      - run: vp run check:astro
-      - run: vp run build
+      - run: vp run verify
