@@ -48,14 +48,43 @@ try {
   );
 
   const assetPaths = new Set([...componentPaths, ...rendererPaths, ...stylesheetPaths]);
+  const entrypointCount = assetPaths.size;
+  const pendingAssetPaths = [...assetPaths];
+  const staticImportPatterns = [
+    /(?:import|export)\s*(?:[^"'()]*?\bfrom\s*)?["']([^"']+)["']/g,
+    /\bimport\s*\(\s*["']([^"']+)["']/g,
+  ];
 
-  for (const assetPath of assetPaths) {
+  for (const assetPath of pendingAssetPaths) {
     const assetResponse = await fetch(new URL(assetPath, origin));
     assert.equal(assetResponse.status, 200, `${assetPath} did not return HTTP 200`);
-    assert.ok((await assetResponse.arrayBuffer()).byteLength > 0, `${assetPath} was empty`);
+    const assetBytes = await assetResponse.arrayBuffer();
+    assert.ok(assetBytes.byteLength > 0, `${assetPath} was empty`);
+
+    if (assetPath.endsWith(".js")) {
+      const source = new TextDecoder().decode(assetBytes);
+      for (const pattern of staticImportPatterns) {
+        for (const match of source.matchAll(pattern)) {
+          const importedUrl = new URL(match[1], new URL(assetPath, origin));
+          if (importedUrl.origin !== origin || !importedUrl.pathname.startsWith("/_astro/")) {
+            continue;
+          }
+          if (!assetPaths.has(importedUrl.pathname)) {
+            assetPaths.add(importedUrl.pathname);
+            pendingAssetPaths.push(importedUrl.pathname);
+          }
+        }
+      }
+    }
   }
 
-  console.log(`Compiled preview served the Svelte island and ${assetPaths.size} client assets.`);
+  assert.ok(
+    assetPaths.size > entrypointCount,
+    "Expected the compiled Svelte entrypoints to have a static client import graph",
+  );
+  console.log(
+    `Compiled preview served the Svelte island and its complete ${assetPaths.size}-asset static client graph.`,
+  );
 } finally {
   await server.stop();
 }
