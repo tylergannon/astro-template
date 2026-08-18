@@ -1,6 +1,6 @@
 import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { isAbsolute, join, resolve } from "node:path";
+import { join, resolve } from "node:path";
 
 import { svelte } from "@rsvelte/vite-plugin-svelte";
 import { build } from "vite";
@@ -34,11 +34,6 @@ try {
       build:
         target === "ssr"
           ? {
-              rollupOptions: {
-                // The client pass resolves every dependency; SSR externalizes bare imports to
-                // focus this second pass on compiling the registry's server output.
-                external: (id) => !id.startsWith(".") && !isAbsolute(id) && !id.startsWith("$lib"),
-              },
               ssr: entry,
               write: false,
             }

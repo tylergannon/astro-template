@@ -15,3 +15,4 @@ decision: Exclude `ephemeral/**` proof, worklog, and review prose from Oxfmt so 
 correction: CI and agent instructions must invoke `vp run verify`; the old pre-Svelte commands omitted rsvelte formatting, linting, ts-go, and full registry compilation.
 decision: Author verification programs as TypeScript included by rsvelte-check --tsgo, and keep preview assertions structural so ordinary template extension remains green.
 correction: Disable Tailwind automatic root scanning and explicitly source `src/`; tracked proof and review prose must never generate production utilities or perturb asset hashes.
+friction: rsvelte 0.5.2 miscompiles mode-watcher's multiline class-field ternary after a $state field during SSR -> patch that expression to one line, render Sonner in the real demo, and keep dependencies bundled in the registry SSR gate.

@@ -8,6 +8,7 @@
     CardHeader,
     CardTitle,
   } from "$lib/components/ui/card/index.js";
+  import { Toaster } from "$lib/components/ui/sonner/index.js";
 
   let count = $state(0);
 </script>
@@ -33,3 +34,5 @@
     </p>
   </CardContent>
 </Card>
+
+<Toaster />
