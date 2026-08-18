@@ -30,8 +30,9 @@ The compiled `SvelteDemo` bundle contains the counter's event handler and both r
 - The registry corpus contains 56 component directories under `src/lib/components/ui`: the 55 Vega items installed by `shadcn-svelte add --all` plus the generic registry's installable `data-table` item.
 - Tailwind content detection is scoped to `src/`, so tracked worklogs, proofs, and reviews cannot change production CSS.
 - `vp run verify` passed Vite+ formatting and linting, rsvelte formatting, rsvelte linting, rsvelte-check through ts-go, full registry client/SSR bundling, Astro checking, the production build, and a compiled-preview HTTP smoke test.
-- `vp run check:shadcn` bundled all 56 registry components for client and SSR through `@rsvelte/vite-plugin-svelte` with the project's Svelte configuration.
+- `vp run check:shadcn` bundled source imports for all 56 registry components for client and SSR through `@rsvelte/vite-plugin-svelte` with the project's Svelte configuration. This is compilation coverage, not a claim that every component was instantiated.
 - The SSR pass bundles registry dependencies instead of externalizing them, including the dark-only Sonner wrapper. Focused bug-shape, one-line, and no-rune probes distinguish the known rsvelte compiler limitation; an upstream fix prints a non-blocking removal notice.
+- The independent reviewer additionally instantiated 55 of the 56 registry items under Astro SSR. The sole exception is the SvelteKit-specific `form` item: its `sveltekit-superforms` runtime imports `$app/*`, which Astro does not provide. The limitation and framework-neutral alternatives are documented in the project README.
 - A temporary `.ts` file containing `const value: string = 123` was rejected by `rsvelte-check --tsgo`, proving the gate covers ordinary TypeScript as well as generated Svelte overlays; the probe was removed before release.
 - `vp run build` passed after the proof component imported generated Badge, Button, Card, CardContent, CardDescription, CardHeader, and CardTitle exports.
 - `vp exec pnpm peers check` reported no peer dependency issues.

@@ -124,7 +124,7 @@ try {
     ? "Confirmed the documented rsvelte limitation. "
     : "";
   console.log(
-    `${limitationStatus}Bundled all ${componentNames.length} shadcn-svelte registry components for client and SSR.`,
+    `${limitationStatus}Bundled source imports for all ${componentNames.length} shadcn-svelte registry components for client and SSR; this gate checks compilation, not component instantiation.`,
   );
 } finally {
   await rm(workspace, { recursive: true, force: true });

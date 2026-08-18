@@ -21,3 +21,4 @@ correction: A healthy upstream compiler fix must not red-line the release gate -
 correction: Verification controls must explain the guarantee that failed instead of surfacing only a stack trace for an already-removed temporary probe file.
 decision: Make the starter consistently dark-only instead of shipping a dead light palette; use semantic theme tokens throughout, fix Sonner to the documented dark theme, and remove the now-unneeded mode-watcher runtime and its vendor patch.
 correction: Record the intentional Sonner registry divergence in both source and consumer docs so a future `--overwrite` does not silently restore mode-watcher.
+limitation: The shadcn-svelte `form` item installs and its source barrel bundles, but real use requires SvelteKit virtual `$app/*` modules through formsnap/sveltekit-superforms -> retain it for complete registry coverage, document that it cannot be instantiated in Astro, and direct consumers to framework-neutral form controls.
